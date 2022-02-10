@@ -7,18 +7,19 @@
 #include "pid.h"
 #include <pthread.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * Allocates the pid map.
  */
 int allocate_map(void) 
 {
-	pid_map = {0};
+	memset(pid_map, 0, sizeof pid_map);
 	if (pid_map) {
 		return 1;
 	}
 	else {
-		return -1
+		return -1;
 	}
 }
 
