@@ -27,8 +27,8 @@ void *consumer(void *param);
 
 int insert_item(buffer_item item)
 {
-	printf("point 1\n");
-	printf("item 1: %d\n", item);
+	//printf("point 1\n");
+	//printf("item 1: %d\n", item);
 
     pthread_mutex_lock(&mutex);
 
@@ -36,7 +36,7 @@ int insert_item(buffer_item item)
 	int emptyValue;
 	sem_getvalue(&empty, &emptyValue);
 
-	printf("emptyValue: %d\n", emptyValue);
+	//printf("emptyValue: %d\n", emptyValue);
     if(emptyValue != 0) {
         for(insertPointer; insertPointer < BUFFER_SIZE; insertPointer++) {
             if(buffer[insertPointer] == NULL) {
@@ -59,7 +59,7 @@ int insert_item(buffer_item item)
 int remove_item(buffer_item *item)
 {
 
-	printf("point 2\n");
+	//printf("point 2\n");
 
     pthread_mutex_lock(&mutex);
 
@@ -67,7 +67,7 @@ int remove_item(buffer_item *item)
 	int fullValue;
 	sem_getvalue(&full, &fullValue);
 
-	printf("fullValue: %d\n", fullValue);
+	//printf("fullValue: %d\n", fullValue);
 
 	if (fullValue <= BUFFER_SIZE) {
         for (removePointer; removePointer < BUFFER_SIZE; removePointer++) {
@@ -77,7 +77,7 @@ int remove_item(buffer_item *item)
 				sem_post(&empty);
 				sem_trywait(&full);
 				pthread_mutex_unlock(&mutex);
-				printf("item 2: %d\n", *item);
+				//printf("item 2: %d\n", *item);
                 return 0;
             }
         }
